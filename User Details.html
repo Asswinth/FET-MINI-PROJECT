@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('form3.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+         .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.7); 
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select,
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        
+        button[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button[type="button"]:hover {
+            background-color: #0056b3;
+        }
+        
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        #submittedFields {
+            margin-top: 20px;
+        }
+        
+        #submittedFields h3 {
+            text-align: center;
+        }
+        
+        #submittedList {
+            list-style: none;
+            padding: 0;
+        }
+        
+        #submittedList li {
+            margin-bottom: 10px;
+        }
+        
+        #submittedList li:last-child {
+            margin-bottom: 0;
+        } 
+        .password-strength {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        
+        .strong {
+            color: green;
+        }
+        
+        .moderate {
+            color: orange;
+        }
+        
+        .weak {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Government Management System</h2>
+        <form id="governmentForm">
+            <input type="text" id="name" placeholder="Name">
+            <div class="error" id="nameError"></div>
+
+            <input type="email" id="email" placeholder="Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+            <div class="error" id="emailError"></div>
+
+            <input type="tel" id="phone" placeholder="Phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+            <div class="error" id="phoneError"></div>
+
+            <textarea id="address" placeholder="Address"></textarea>
+            <div class="error" id="addressError"></div>
+
+            <input type="text" id="nationality" placeholder="Nationality">
+            <div class="error" id="nationalityError"></div>
+
+            <input type="text" id="citizenship" placeholder="Citizenship">
+            <div class="error" id="citizenshipError"></div>
+
+            <select id="gender">
+                <option value="" disabled selected>Choose Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <div class="error" id="genderError"></div>
+
+            <textarea id="comment" placeholder="Comment"></textarea>
+            <div class="error" id="commentError"></div>
+
+            <input type="date" id="dob">
+            <div class="error" id="dobError"></div>
+
+            <input type="password" id="password" placeholder="Password" minlength="6">
+            <div class="error" id="passwordError"></div>
+            <div class="password-strength" id="passwordStrength"></div>
+
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <div class="error" id="confirmPasswordError"></div>
+
+            <button type="button" id="submitBtn">Submit</button>
+        </form>
+        <div id="submittedFields" class="hidden">
+            <h3>Submitted Information:</h3>
+            <ul id="submittedList"></ul>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="government.js"></script>
+</body>
+</html>

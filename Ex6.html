@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Management System</title>
+    <style>
+        body {
+            background-image: url('login2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+           .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin-top: 50px;
+        }
+        input,
+        textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .password-strength {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .strong {
+            color: green;
+        }
+        .weak {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Government Management System</h2>
+        <form id="governmentForm">
+            <input type="text" id="name" placeholder="Name">
+            <div class="error" id="nameError"></div>
+            <input type="email" id="email" placeholder="Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+            <div class="error" id="emailError"></div>
+            <input type="tel" id="phone" placeholder="Phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+            <div class="error" id="phoneError"></div>
+            <textarea id="address" placeholder="Address"></textarea>
+            <div class="error" id="addressError"></div>
+            <input type="password" id="password" placeholder="Password" minlength="6">
+            <div class="error" id="passwordError"></div>
+            <div class="password-strength" id="passwordStrength"></div>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <div class="error" id="confirmPasswordError"></div>
+            <button type="button" id="submitBtn">Submit</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#submitBtn').click(function () {
+                $('.error').text('');
+                var name = $('#name').val().trim();
+                var email = $('#email').val().trim();
+                var phone = $('#phone').val().trim();
+                var address = $('#address').val().trim();
+                var password = $('#password').val().trim();
+                var confirmPassword = $('#confirmPassword').val().trim();
+                if (name === '') {
+                    $('#nameError').text('Name is required');
+                    return;
+                }
+                if (email === '') {
+                    $('#emailError').text('Email is required');
+                    return;
+                }
+                if (phone === '') {
+                    $('#phoneError').text('Phone is required');
+                    return;
+                }
+                if (address === '') {
+                    $('#addressError').text('Address is required');
+                    return;
+                }
+                if (password === '') {
+                    $('#passwordError').text('Password is required');
+                    return;
+                }
+                if (password.length < 6) {
+                    $('#passwordError').text('Password must be at least 6 characters');
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    $('#confirmPasswordError').text('Passwords do not match');
+                    return;
+                }
+                window.location.href = 'success.html';
+            });
+            $('#password').on('input', function () {
+                var password = $(this).val();
+                var strength = 0;
+                if (password.match(/[a-z]+/)) {
+                    strength += 1;
+                }
+                if (password.match(/[A-Z]+/)) {
+                    strength += 1;
+                }
+                if (password.match(/[0-9]+/)) {
+                    strength += 1;
+                }
+                if (password.length > 7) {
+                    strength += 1;
+                }
+                if (strength < 2) {
+                    $('#passwordStrength').text('Weak').removeClass('strong').addClass('weak');
+                } else if (strength === 2) {
+                    $('#passwordStrength').text('Moderate').removeClass('weak').addClass('moderate');
+                } else {
+                    $('#passwordStrength').text('Strong').removeClass('weak').addClass('strong');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

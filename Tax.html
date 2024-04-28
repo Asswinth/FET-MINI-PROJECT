@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="governmentManagementApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Management System - Tax Payment</title>
+    <style>
+    body {
+
+        font-family: Arial, sans-serif;    
+        background-image: url('tax4.jpg');  
+        background-size: cover;    
+        margin: 0; 
+        padding: 20px; 
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto; 
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+        
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .submitted-data {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<div class="container" ng-controller="FormController as formCtrl">
+    <h1>Government Management System - Tax Payment</h1>
+
+    <form name="formCtrl.form" ng-submit="formCtrl.submitForm()" novalidate>
+
+        <div class="form-group">
+            <label for="taxpayerName">Taxpayer Name:</label>
+            <input type="text" id="taxpayerName" name="taxpayerName" ng-model="formCtrl.formData.taxpayerName" required>
+            <div class="error-message" ng-show="formCtrl.form.taxpayerName.$dirty && formCtrl.form.taxpayerName.$error.required">Taxpayer Name is required</div>
+        </div>
+
+        <div class="form-group">
+            <label for="taxpayerEmail">Taxpayer Email:</label>
+            <input type="email" id="taxpayerEmail" name="taxpayerEmail" ng-model="formCtrl.formData.taxpayerEmail" required>
+            <div class="error-message" ng-show="formCtrl.form.taxpayerEmail.$dirty && formCtrl.form.taxpayerEmail.$error.required">Taxpayer Email is required</div>
+            <div class="error-message" ng-show="formCtrl.form.taxpayerEmail.$dirty && formCtrl.form.taxpayerEmail.$error.email">Invalid email</div>
+        </div>
+
+        <div class="form-group">
+            <label for="taxAmount">Tax Amount:</label>
+            <input type="number" id="taxAmount" name="taxAmount" ng-model="formCtrl.formData.taxAmount" required>
+            <div class="error-message" ng-show="formCtrl.form.taxAmount.$dirty && formCtrl.form.taxAmount.$error.required">Tax Amount is required</div>
+        </div>
+
+        <div class="form-group">
+            <label for="paymentDate">Payment Date:</label>
+            <input type="date" id="paymentDate" name="paymentDate" ng-model="formCtrl.formData.paymentDate" required>
+            <div class="error-message" ng-show="formCtrl.form.paymentDate.$dirty && formCtrl.form.paymentDate.$error.required">Payment Date is required</div>
+        </div>
+
+        <div class="form-group">
+            <label for="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod" name="paymentMethod" ng-model="formCtrl.formData.paymentMethod" required>
+                <option value="">Select Payment Method</option>
+                <option value="credit">Credit Card</option>
+                <option value="debit">Debit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank">Bank Transfer</option>
+            </select>
+            <div class="error-message" ng-show="formCtrl.form.paymentMethod.$dirty && formCtrl.form.paymentMethod.$error.required">Please select payment method</div>
+        </div>
+
+        <div class="form-group">
+            <label for="taxCategory">Tax Category:</label>
+            <input type="text" id="taxCategory" name="taxCategory" ng-model="formCtrl.formData.taxCategory" required>
+            <div class="error-message" ng-show="formCtrl.form.taxCategory.$dirty && formCtrl.form.taxCategory.$error.required">Tax Category is required</div>
+        </div>
+
+        <div class="form-group">
+            <label for="taxYear">Tax Year:</label>
+            <input type="number" id="taxYear" name="taxYear" ng-model="formCtrl.formData.taxYear" required>
+            <div class="error-message" ng-show="formCtrl.form.taxYear.$dirty && formCtrl.form.taxYear.$error.required">Tax Year is required</div>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" ng-model="formCtrl.formData.comment" required></textarea>
+            <div class="error-message" ng-show="formCtrl.form.comment.$dirty && formCtrl.form.comment.$error.required">Comment is required</div>
+        </div>
+
+        <button type="submit" ng-disabled="formCtrl.form.$invalid">Submit</button>
+    </form>
+
+    <div class="submitted-data" ng-if="formCtrl.submitted">
+        <h2>Submitted Tax Payment Data:</h2>
+        <p><strong>Taxpayer Name:</strong> {{ formCtrl.formData.taxpayerName }}</p>
+        <p><strong>Taxpayer Email:</strong> {{ formCtrl.formData.taxpayerEmail }}</p>
+        <p><strong>Tax Amount:</strong> {{ formCtrl.formData.taxAmount }}</p>
+        <p><strong>Payment Date:</strong> {{ formCtrl.formData.paymentDate }}</p>
+        <p><strong>Payment Method:</strong> {{ formCtrl.formData.paymentMethod }}</p>
+        <p><strong>Tax Category:</strong> {{ formCtrl.formData.taxCategory }}</p>
+        <p><strong>Tax Year:</strong> {{ formCtrl.formData.taxYear }}</p>
+        <p><strong>Comment:</strong> {{ formCtrl.formData.comment }}</p>
+    </div>
+
+</div>
+
+<script>
+    angular.module('governmentManagementApp', [])
+        .controller('FormController', function () {
+            var vm = this;
+            vm.formData = {};
+            vm.submitted = false;
+
+            vm.submitForm = function () {
+                vm.submitted = true;
+            };
+        });
+</script>
+
+</body>
+</html>
